@@ -1,0 +1,17 @@
+language: node_js
+
+node_js:
+  - "0.10"
+  - "0.12"
+  - "4"
+  - "5"
+  - "6"
+
+os:
+  - linux
+  - osx
+
+install:
+  - npm install
+  - if [[ $TRAVIS_NODE_VERSION == "0.10" ]]; then npm uninstall --save-dev lab; npm install --save-dev lab@6.2.0; fi
+  - if [[ $TRAVIS_NODE_VERSION == "0.12" ]]; then npm uninstall --save-dev lab; npm install --save-dev lab@6.2.0; fi

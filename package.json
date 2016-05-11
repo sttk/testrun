@@ -1,0 +1,29 @@
+{
+  "name": "testrun",
+  "version": "0.1.0",
+  "description": "A module to support a test",
+  "main": "index.js",
+  "scripts": {
+    "test": "jshint index.js lib && lab -v test/format.js test/byplatform.js lib/lab.js && mocha test/mocha.mocha",
+    "coverage": "lab -cv test/*.js --coverage-exclude lib/mocha.js && istanbul cover _mocha test/mocha.mocha -x lib/format.js -x lib/byplatform.js -x lib/lab.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sttk/testrun.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "Takayuki Sato",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sttk/testrun/issues"
+  },
+  "homepage": "https://github.com/sttk/testrun#readme",
+  "devDependencies": {
+    "istanbul": "^0.4.3",
+    "jshint": "^2.9.2",
+    "lab": "^10.5.1",
+    "mocha": "^2.4.5"
+  }
+}

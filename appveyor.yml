@@ -1,0 +1,23 @@
+environment:
+  matrix:
+    # node.js
+    - nodejs_version: "0.10"
+    - nodejs_version: "0.12"
+    - nodejs_version: "4"
+    - nodejs_version: "5"
+    - nodejs_version: "6"
+
+install:
+  - ps: if($env:nodejs_version -eq "0.10") { Move-Item package.json package.json.bak; (Get-Content package.json.bak -Raw).Replace('"lab":', "LAB").Replace('LAB "^10.5.1"', "LAB").Replace("LAB", '"lab":LAB').Replace("LAB", ' "^6.2.0"') | Set-Content package.json }
+  - ps: if($env:nodejs_version -eq "0.12") { Move-Item package.json package.json.bak; (Get-Content package.json.bak -Raw).Replace('"lab":', "LAB").Replace('LAB "^10.5.1"', "LAB").Replace("LAB", '"lab":LAB').Replace("LAB", ' "^6.2.0"') | Set-Content package.json }
+  - ps: Install-Product node $env:nodejs_version
+  - npm install
+
+test_script:
+  - node --version
+  - npm --version
+  - npm test
+
+build: off
+
+version: "{build}"
