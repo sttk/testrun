@@ -1,7 +1,10 @@
 const assert = require('assert');
+
+// test if the argument is null.
 assert.throws(function() {
   require('../').lab(null);
 }, TypeError);
+
 
 const testrun = require('../').lab(exports);
 

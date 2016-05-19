@@ -1,0 +1,22 @@
+const testrun = require('../').mocha;
+const assert = require('assert');
+
+function testfn(testcase, done) {
+  setTimeout(function() {
+    assert.equal(testcase.param, testcase.expected);
+    done();
+  }, 100);
+}
+
+testrun('testrun on mocha (own evaluation or async.)', testfn, [
+  {
+    name: 'test 1',
+    param: 'ABC',
+    expected: 'ABC',
+  },
+  {
+    name: 'test 2',
+    param: 123,
+    expected: 123,
+  },
+]);

@@ -18,7 +18,7 @@ $ npm install testrun --save-dev
 (sample.js)
 const testrun = require('testrun').mocha;
 
-function testfn(testcase) {  // `testcase` is a property of the 3rd argument of `testrun` 
+function testfn(testcase) {  // `testcase` is a property of the 3rd argument of `testrun`
   if (typeof testcase.in === 'string') {
     return testcase.in;
   } else {
@@ -39,6 +39,10 @@ testrun('test name', testfn, [
         name: 'test for in:${testcase.in} => ${testcase.error}',
         in: ['a', 'b', 'c'],
         error: TypeError,  // `error` is the keyword for specifying expected error.
+      },
+      {
+        name: 'sub test case group',
+        cases: [ ... ],
       },
     ],
   },
@@ -77,15 +81,26 @@ $ mocha sample.js
 
 ## APIs
 
-### testrun(testname, testfn, testcases)
+### testrun(testname, testfn, testcases) => void
 
 runs the specified test function for each test cases.
 
 ##### Arguments:
 
-* **testcase** [string] : test name.
-* **testfn** [function] : test function. (the argument is a testcase).
-* **testcases** [Array] : test cases.
+* **testname** [string] : a test name.
+* **testfn** [function] : a test function. (see below.)
+* **testcases** [array] : an array of test cases.
+
+    #### *testfn* (testcase [, done]) => any
+
+    is a function to execute a testcase. The argument *`testcase`* is each property in *`testcases`* passed to `testrun` function.
+
+    ##### Arguments:
+
+    * **testcase** [object] : a test case object.
+    * **done** [function] : a callback to end.
+        - If this argument is not specified, *`testfn`* is required to return a result or to throw an error.
+        - If this argument is specified, *`testfn`* is required to evaluate a testcase in own way and execute this argument to end it.
 
 ### testrun.byPlatform(valuesByPlatforms) => any
 
@@ -114,7 +129,7 @@ This program is free software under [MIT](https://opensource.org/licenses/MIT) L
 See the file LICENSE in this distribution for more details.
 
 
-[npm-image]: http://img.shields.io/badge/npm-v0.1.0-blue.svg
+[npm-image]: http://img.shields.io/badge/npm-v0.2.0-blue.svg
 [npm-url]: https://www.npmjs.org/package/testrun
 [travis-image]: https://travis-ci.org/sttk/testrun.svg?branch=master
 [travis-url]: https://travis-ci.org/sttk/testrun
