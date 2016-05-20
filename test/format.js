@@ -2,10 +2,10 @@ const lab = exports.lab = require('lab').script();
 const assert = require('assert');
 
 const format = require('../lib/format');
+const eq = assert.strictEqual;
 
 lab.experiment('format', function() {
   lab.test('should format a string', function(done) {
-    var eq = assert.strictEqual;
     eq(format('', {}), '');
     eq(format('A', {}), 'A');
     eq(format('A', { a: 'xxx' }), 'A');
@@ -20,9 +20,22 @@ lab.experiment('format', function() {
   });
   lab.test('should replace error objects/functions to error name',
       function(done) {
-    var eq = assert.strictEqual;
     eq(format("=> ${testcase.e1}", { e1: TypeError }), "=> TypeError");
     eq(format("=> ${testcase.e2}", { e2: new TypeError() }), "=> TypeError");
+    done();
+  });
+  lab.test('should unescape back slashes which escaped by util.inspect',
+      function(done) {
+    var str = '\\';
+    eq(format('${testcase.a}', { a: str }), "'" + str + "'");
+    str = '\\\\';
+    eq(format('${testcase.a}', { a: str }), "'" + str + "'");
+    str = '\\\\\\';
+    eq(format('${testcase.a}', { a: str }), "'" + str + "'");
+    str = '\\\\\\\\';
+    eq(format('${testcase.a}', { a: str }), "'" + str + "'");
+    str = '\\\\ a\\b\\\\\\c\\';
+    eq(format('${testcase.a}', { a: str }), "'" + str + "'");
     done();
   });
 });
