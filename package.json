@@ -4,8 +4,8 @@
   "description": "A module to support a test",
   "main": "index.js",
   "scripts": {
-    "test": "jshint index.js lib && lab -v test/byplatform.js test/format.js test/lab.js test/lab_async.js && mocha test/mocha.mocha test/mocha_async.mocha",
-    "coverage": "lab -cv test/*.js --coverage-exclude lib/mocha.js && istanbul cover _mocha test/mocha.mocha test/mocha_async.mocha -x lib/format.js -x lib/byplatform.js -x lib/lab.js"
+    "test": "jshint index.js lib && lab -v test/byplatform.js test/format.js test/lab.js test/lab_async.js test/scriptrun.js && mocha test/mocha.mocha test/mocha_async.mocha test/scriptrun.mocha",
+    "coverage": "lab -cv test/*.js --coverage-exclude lib/mocha.js && istanbul cover _mocha test/*.mocha -x lib/format.js -x lib/byplatform.js -x lib/lab.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,9 @@
     "jshint": "^2.9.2",
     "lab": "^10.5.1",
     "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "del": "^2.2.0",
+    "mkdirp": "^0.5.1"
   }
 }

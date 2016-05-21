@@ -108,7 +108,7 @@ returns a value for the current platform.
 
 ##### Arguments:
 
-* **valuesByPlatforms** : [plain-object | any] : values by platforms.
+* **valuesByPlatforms** [plain-object | any] : values by platforms.
 
 ##### Example:
 
@@ -121,6 +121,34 @@ testrun.byPlatform('abc');
 // => 'abc'
 ```
 
+### testrun.scriptrun(templateFile, testDir) => function
+
+returns a function which executes javascript based on content of `templateFile` on child process.
+
+##### Arguments:
+
+* **templateFile** [string] : a path string of a javascript template file for a test case.
+* **testDir** [string] : a path string of a directory to output a javascript file for a test case.
+
+##### Example:
+
+```js
+(template.js)
+const assert = require('assert');
+var testcase = ${testcase};
+assert.strictEqual(testcase.input.toUpperCase(), testcase.expected);
+```
+
+```js
+const testfn = testrun.scriptrun(templateFile, testDir);
+
+testrun('convert letter case', testfn, [
+  { name: 'convert ${testcase.input} => ${testcase.expected}', input: 'abc', expected: 'ABC' },
+  ...
+]);
+```
+
+
 ## License
 
 Copyright (C) 2016 Takayuki Sato
@@ -129,7 +157,7 @@ This program is free software under [MIT](https://opensource.org/licenses/MIT) L
 See the file LICENSE in this distribution for more details.
 
 
-[npm-image]: http://img.shields.io/badge/npm-v0.2.0-blue.svg
+[npm-image]: http://img.shields.io/badge/npm-v0.3.0-blue.svg
 [npm-url]: https://www.npmjs.org/package/testrun
 [travis-image]: https://travis-ci.org/sttk/testrun.svg?branch=master
 [travis-url]: https://travis-ci.org/sttk/testrun
