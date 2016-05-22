@@ -1,4 +1,5 @@
 const testrun = require('../').mocha;
+const path = require('path');
 
 function testfn(testcase) {
   if (typeof testcase.in === 'string') {
@@ -33,5 +34,13 @@ testrun('testrun on mocha', testfn, [
     in: '123',
     expect: '123',
     err: Error,
+  },
+  {
+    name: 'Deel with issue #2242 of mocha',
+    in: path.resolve('C:'),
+    expected: testrun.byPlatform({
+      win32: process.cwd(),
+      otherwise: path.join(process.cwd(), 'C:'),
+    }),
   },
 ]);
