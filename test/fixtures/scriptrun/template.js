@@ -1,4 +1,8 @@
 const assert = require('assert');
 var testcase = ${testcase};
-assert.strictEqual(testcase.input.toUpperCase(), testcase.expected)
+if (typeof testcase.input === 'string') {
+  assert.strictEqual(testcase.input.toUpperCase(), testcase.expected)
+} else {
+  assert.deepEqual(testcase.input, testcase.expected)
+}
 

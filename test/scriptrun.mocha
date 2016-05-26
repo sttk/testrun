@@ -16,4 +16,9 @@ testrun('scriptrun', testfn, [
     input: 'xyz',
     expected: 'XYZ',
   },
+  {
+    name: 'not convert ${testcase.input} => ${testcase.expected}',
+    input: { a: { b: { c: 123 } } },
+    expected: { a: { b: { c: 123 } } },
+  },
 ]);
