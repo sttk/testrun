@@ -1,6 +1,6 @@
 {
   "name": "testrun",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A module to support a test",
   "main": "index.js",
   "scripts": {

@@ -176,7 +176,7 @@ This program is free software under [MIT](https://opensource.org/licenses/MIT) L
 See the file LICENSE in this distribution for more details.
 
 
-[npm-image]: http://img.shields.io/badge/npm-v0.5.0-blue.svg
+[npm-image]: http://img.shields.io/badge/npm-v0.6.0-blue.svg
 [npm-url]: https://www.npmjs.org/package/testrun
 [travis-image]: https://travis-ci.org/sttk/testrun.svg?branch=master
 [travis-url]: https://travis-ci.org/sttk/testrun
