@@ -44,6 +44,16 @@ testrun('test name', testfn, [
         name: 'sub test case group',
         cases: [ ... ],
       },
+      {
+        name: 'skip this test case',
+        skip: true,        // `skip` is the keyword to skip a test case or a test case group.
+        ...
+      },
+      {
+        name: 'only run this test case',
+        only: true,        // 'only' is the keyword to run only a test case or a test case group.
+        ...
+      },
     ],
   },
 ]);
@@ -62,7 +72,7 @@ $ mocha sample.js
 
 ```
 
-## Supporting test framework
+## Supporting test frameworks
 
 - [mocha](http://mochajs.org/)
 
@@ -81,32 +91,40 @@ $ mocha sample.js
 
 ## APIs
 
-### testrun(testname, testfn, testcases) => void
+### _testrun(testname, testfn, testcases) => void_
 
 runs the specified test function for each test cases.
 
-##### Arguments:
+##### Parameters:
 
 * **testname** [string] : a test name.
 * **testfn** [function] : a test function. (see below.)
 * **testcases** [array] : an array of test cases.
 
-    #### *testfn* (testcase [, done]) => any
+#### _*testfn* (testcase [, done]) => any_
 
-    is a function to execute a testcase. The argument *`testcase`* is each property in *`testcases`* passed to `testrun` function.
+is a function to execute a testcase. The argument *`testcase`* is each property in *`testcases`* passed to `testrun` function.
 
-    ##### Arguments:
+##### Parameters:
 
-    * **testcase** [object] : a test case object.
-    * **done** [function] : a callback to end.
-        - If this argument is not specified, *`testfn`* is required to return a result or to throw an error.
-        - If this argument is specified, *`testfn`* is required to evaluate a testcase in own way and execute this argument to end it.
+* **testcase** [object] : a test case object.
+* **done** [function] : a callback to end.
+    - If this argument is not specified, *`testfn`* is required to return a result or to throw an error.
+    - If this argument is specified, *`testfn`* is required to evaluate a testcase in own way and execute this argument to end it.
 
-### testrun.byPlatform(valuesByPlatforms) => any
+#### _*Reserved words for properties of testcase*_
+
+* **expected** [any] : set an expected value of a test case.
+* **error** [Error] : set an error type which a test case throws
+* **cases** [array] : set a test case group.
+* **skip** [boolean] : set `true` if you want to skip a test case or a test case group.
+* **only** [boolean] : set `true` if you want to run only a test case or a test case group.
+
+### _testrun.byPlatform(valuesByPlatforms) => any_
 
 returns a value for the current platform.
 
-##### Arguments:
+##### Parameters:
 
 * **valuesByPlatforms** [plain-object | any] : values by platforms.
 
@@ -121,11 +139,12 @@ testrun.byPlatform('abc');
 // => 'abc'
 ```
 
-### testrun.scriptrun(templateFile, testDir) => function
+
+### _testrun.scriptrun(templateFile, testDir) => function_
 
 returns a function which executes javascript based on content of `templateFile` on child process.
 
-##### Arguments:
+##### Parameters:
 
 * **templateFile** [string] : a path string of a javascript template file for a test case.
 * **testDir** [string] : a path string of a directory to output a javascript file for a test case.
