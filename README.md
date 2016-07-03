@@ -1,6 +1,8 @@
-# testrun  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Build Status][appveyor-image]][appveyor-url]
+# testrun  [![Build Status][travis-image]][travis-url] [![Build Status][appveyor-image]][appveyor-url]
 
-A module to support a test.
+> A module to support a test.
+
+[![NPM][npm-image]][npm-url]
 
 ## Install
 
@@ -49,11 +51,13 @@ testrun('test name', testfn, [
         skip: true,        // `skip` is the keyword to skip a test case or a test case group.
         ...
       },
+      /*
       {
         name: 'only run this test case',
         only: true,        // 'only' is the keyword to run only a test case or a test case group.
         ...
       },
+      */
     ],
   },
 ]);
@@ -91,7 +95,7 @@ $ mocha sample.js
 
 ## APIs
 
-### _testrun(testname, testfn, testcases) => void_
+### <u>testrun(testname, testfn, testcases) => void</u>
 
 runs the specified test function for each test cases.
 
@@ -101,26 +105,28 @@ runs the specified test function for each test cases.
 * **testfn** [function] : a test function. (see below.)
 * **testcases** [array] : an array of test cases.
 
-#### _*testfn* (testcase [, done]) => any_
+    #### <u>*testfn* (testcase [, done]) => any</u>
 
-is a function to execute a testcase. The argument *`testcase`* is each property in *`testcases`* passed to `testrun` function.
+    is a function to execute a testcase. The argument *`testcase`* is each property in *`testcases`*    passed to `testrun` function.
 
-##### Parameters:
+    ##### Parameters:
 
-* **testcase** [object] : a test case object.
-* **done** [function] : a callback to end.
-    - If this argument is not specified, *`testfn`* is required to return a result or to throw an error.
-    - If this argument is specified, *`testfn`* is required to evaluate a testcase in own way and execute this argument to end it.
+    * **testcase** [object] : a test case object.
+    * **done** [function] : a callback to end.
+        - If this argument is not specified, *`testfn`* is required to return a result or to throw an error.
+        - If this argument is specified, *`testfn`* is required to evaluate a testcase in own way and execute this argument to end it.
 
-#### _*Reserved words for properties of testcase*_
+    #### <u>*testcase*</u>
+    
+    ##### Reserved words for properties of testcase:
 
-* **expected** [any] : set an expected value of a test case.
-* **error** [Error] : set an error type which a test case throws
-* **cases** [array] : set a test case group.
-* **skip** [boolean] : set `true` if you want to skip a test case or a test case group.
-* **only** [boolean] : set `true` if you want to run only a test case or a test case group.
+    * **expected** [any] : set an expected value of a test case.
+    * **error** [Error] : set an error type which a test case throws
+    * **cases** [array] : set a test case group.
+    * **skip** [boolean] : set `true` if you want to skip a test case or a test case group.
+    * **only** [boolean] : set `true` if you want to run only a test case or a test case group.
 
-### _testrun.byPlatform(valuesByPlatforms) => any_
+### <u>testrun.byPlatform(valuesByPlatforms) => any</u>
 
 returns a value for the current platform.
 
@@ -140,7 +146,7 @@ testrun.byPlatform('abc');
 ```
 
 
-### _testrun.scriptrun(templateFile, testDir) => function_
+### <u>testrun.scriptrun(templateFile, testDir) => function</u>
 
 returns a function which executes javascript based on content of `templateFile` on child process.
 
@@ -176,8 +182,8 @@ This program is free software under [MIT](https://opensource.org/licenses/MIT) L
 See the file LICENSE in this distribution for more details.
 
 
-[npm-image]: http://img.shields.io/badge/npm-v0.6.0-blue.svg
-[npm-url]: https://www.npmjs.org/package/testrun
+[npm-image]: http://nodei.co/npm/testrun.png
+[npm-url]: https://nodei.co/npm/testrun/
 [travis-image]: https://travis-ci.org/sttk/testrun.svg?branch=master
 [travis-url]: https://travis-ci.org/sttk/testrun
 [appveyor-image]: https://ci.appveyor.com/api/projects/status/github/sttk/testrun?branch=master&svg=true
