@@ -4,7 +4,10 @@
   "description": "A module to support a test",
   "main": "index.js",
   "scripts": {
-    "test": "jshint index.js lib && lab -v test/byplatform.js test/format.js test/lab.js test/lab_async.js test/scriptrun.js test/lab_skip.js && lab -v test/lab_only.js && mocha test/mocha.mocha test/mocha_async.mocha test/scriptrun.mocha test/mocha_skip.mocha && mocha test/mocha_only.mocha"
+    "lint": "jshint index.js lib",
+    "test_lab": "lab -v test/byplatform.js test/format.js test/lab.js test/lab_async.js test/scriptrun.js test/scriptrun_cmd.js test/lab_skip.js && lab -v test/lab_only.js",
+    "test_mocha": "mocha test/mocha.mocha test/mocha_async.mocha test/scriptrun.mocha test/scriptrun_cmd.mocha test/mocha_skip.mocha && mocha test/mocha_only.mocha",
+    "test": "npm run lint && npm run test_lab && npm run test_mocha"
   },
   "repository": {
     "type": "git",
