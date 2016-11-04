@@ -1,0 +1,26 @@
+const testrun = require('../').mocha;
+const path = require('path');
+
+function testfn(testcase) {
+  return testcase.result;
+}
+
+testrun('test of evaluating function', testfn, [
+  {
+    name: 'An expected value is NaN (OK)',
+    result: NaN,
+    expected: NaN,
+  },
+  {
+    skip: true,
+    name: 'An expected value is NaN (NG)',
+    result: 1,
+    expected: NaN,
+  },
+  {
+    skip: true,
+    name: 'An expected value is NaN (NG)',
+    result: 'a',
+    expected: NaN,
+  },
+]);
