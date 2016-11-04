@@ -9,7 +9,7 @@ node_js:
 
 os:
   - linux
-  - osx
+  # osx
 
 install:
   - npm install
